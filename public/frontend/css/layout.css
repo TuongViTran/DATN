@@ -1,0 +1,208 @@
+/* Import font SFU Futura */
+
+@font-face {
+    font-family: 'SFU Futura';
+    src: url('../../fonts/SFUFutura-Book.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'SFU Futura';
+    src: url('../../fonts/SFUFutura-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'SFU Futura';
+    src: url('../../fonts/SFUFutura-Bold.ttf') format('truetype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'SFU Futura';
+    src: url('../../fonts/SFUFutura-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+}
+
+
+/* Định dạng chung */
+
+body {
+    font-family: 'SFU Futura', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.yellow {
+    background: #FFD700;
+}
+
+.blue {
+    background: #4682B4;
+}
+
+.grey {
+    background: #B0B0B0;
+}
+
+
+/* Navigation */
+
+nav {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+nav a {
+    font-size: 23px;
+    /* SFU Futura Book - Size 23px */
+    font-weight: normal;
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+}
+
+nav a.active {
+    border-bottom: 3px solid black;
+    padding-bottom: 5px;
+}
+
+
+/* Button */
+
+.btn {
+    font-family: 'SFU Futura', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline {
+    border: 2px solid black;
+    background: white;
+}
+
+.btn-outline:hover {
+    background: black;
+    color: white;
+}
+
+.btn-primary {
+    background: #FFD700;
+    color: black;
+}
+
+.btn-primary:hover {
+    background: #E6C200;
+}
+
+
+/* Section tìm kiếm */
+
+.search-section {
+    width: 1440px;
+    height: 445px;
+    margin: auto;
+    background: url('../../images/search-bg.jpg') no-repeat center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    padding: 20px;
+}
+
+
+/* Thanh tìm kiếm */
+
+.search-box {
+    display: flex;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    width: 60%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    outline: none;
+    font-weight: 300;
+    font-family: 'SFU Futura', sans-serif;
+}
+
+.btn-location {
+    font-family: 'SFU Futura', sans-serif;
+    background: #FFD700;
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btn-location:hover {
+    background: #E6C200;
+}
+
+
+/* Bộ lọc */
+
+.filter-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.filter {
+    font-family: 'SFU Futura', sans-serif;
+    font-weight: 700;
+    padding: 12px 18px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.filter:hover {
+    background: #f4f4f4;
+}
