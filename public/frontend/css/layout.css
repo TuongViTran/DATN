@@ -36,9 +36,6 @@ body {
 
 /* Header */
 
-
-/* General Navbar Styling */
-
 header {
     display: flex;
     justify-content: space-between;
@@ -62,7 +59,7 @@ header {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 25px;
     /*khoảng cách giữa cách li*/
     padding: 0;
     margin: 0;
@@ -80,21 +77,29 @@ nav ul li a {
     font-weight: 500;
     text-decoration: none;
     color: black;
-    padding: 10px 15px;
-    border-radius: 8px;
+    padding: 5px 10px;
     transition: all 0.3s ease;
 }
 
 nav ul li a:hover {
-    background: #FDF1D6;
+    background: #e6c056;
+    color: rgb(255, 255, 255);
+    border-radius: 8px;
+    /* Thêm để đổi màu text */
+}
+
+nav ul li a:hover .icon img {
+    filter: invert(1) brightness(2);
 }
 
 
 /* Active Link */
 
 nav ul li.active a {
-    background: #FDF1D6;
+    background: #ffffff;
     border-bottom: 3px solid black;
+    color: rgb(100, 100, 100);
+    /* Nếu muốn active link cũng xám */
 }
 
 
@@ -109,6 +114,8 @@ nav ul li.active a {
 .icon img {
     height: 20px;
     width: auto;
+    transition: all 0.3s ease;
+    /* Để icon chuyển mượt hơn khi hover */
 }
 
 
@@ -133,9 +140,18 @@ nav ul li.active a {
     border-radius: 8px;
 }
 
+.weather-info {
+    font-size: 18px;
+}
+
 .weather-icon {
     font-size: 22px;
     margin-right: 8px;
+}
+
+.date-info {
+    font-size: 16px;
+    color: #555;
 }
 
 
@@ -205,7 +221,7 @@ nav ul li.active a {
 }
 
 
-/* Section tìm kiếm */
+/* Section tìm kiếm--------------------------------------------------- */
 
 .search-section {
     width: 1440px;
@@ -215,22 +231,26 @@ nav ul li.active a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     text-align: center;
     color: black;
-    padding: 20px;
+    padding: 30px;
 }
 
 
-/* Thanh tìm kiếm */
+/* Thanh tìm kiếm--------------------------------------------------*/
 
 .search-box {
     display: flex;
+    margin: 20px 0px;
     background: white;
     padding: 12px;
     border-radius: 8px;
     width: 60%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(240, 228, 164, 0.8);
+    /* Màu vàng */
+    border: 1px solid #8f8f8f;
+    /* Viền vàng nhẹ cho nổi bật */
+    transition: box-shadow 0.3s ease-in-out;
 }
 
 .search-box input {
@@ -245,7 +265,7 @@ nav ul li.active a {
 
 .btn-location {
     font-family: 'SFU Futura', sans-serif;
-    background: #FFD700;
+    background: #fad46b;
     border: none;
     padding: 12px 15px;
     cursor: pointer;
@@ -254,7 +274,7 @@ nav ul li.active a {
 }
 
 .btn-location:hover {
-    background: #E6C200;
+    background: #fcd914;
 }
 
 
@@ -268,7 +288,7 @@ nav ul li.active a {
 
 .filter-container {
     width: 250px;
-    border: 2px solid #783C00;
+    border: 1px solid #8f8f8f;
     border-radius: 10px;
     background: #fff;
     padding: 5px;
@@ -284,7 +304,8 @@ nav ul li.active a {
     text-align: left;
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /* Đưa nội dung về trái */
     align-items: center;
     padding: 10px;
 }
@@ -305,39 +326,220 @@ nav ul li.active a {
 }
 
 
-/*slider*/
+/* Thêm icon trước chữ */
 
-.slider-container {
+.dropdown-btn .icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    /* Tạo khoảng cách giữa icon và chữ */
+}
+
+
+/* Hover hiệu ứng */
+
+.dropdown-btn:hover {
+    /* Màu vàng khi hover */
+    color: #919191;
+}
+
+.hello h2 {
+    font-family: 'SFU Futura', sans-serif;
+    border: none;
+    padding: 12px 0px 0px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #363636;
+    font-size: 40px;
+}
+
+
+/*slider--------------------------------------------------------------------------------------------*/
+
+.container_slider {
+    margin: auto;
+    max-width: 1200px;
+    font-family: 'SFU Futura';
+}
+
+.content_slider {
+    background: #ffffff;
+    padding: 5px;
+    border-radius: 15px;
+    min-height: 150px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#content-slider .slide {
+    min-width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    /* Bổ sung flex cho sắp xếp theo cột */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* căn trái, nếu muốn căn giữa đổi thành center */
+    gap: 15px;
+}
+
+#content-slider .slide h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+#content-slider .slide p {
+    font-size: 16px;
+    color: #555;
+    margin: 0;
+}
+
+#content-slider .slide .tacgia {
     display: flex;
     align-items: center;
-    gap: 10px;
+    font-size: 14px;
+    color: #777;
+}
+
+#content-slider .slide .tacgia img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/*Row 3 hình ảnh */
+
+.custom-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 200px;
+    /* Thay 50px */
+    background-color: #fff;
+    /* Cho chắc */
+}
+
+.card-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: white;
+    padding: 5px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.card-content {
+    position: absolute;
+    color: #fff;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.slider-container {
+    position: relative;
+    overflow: hidden;
 }
 
 .slider {
+    display: flex;
+    transition: transform 0.5s ease;
     width: 100%;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 8px;
-    background: #ddd;
-    border-radius: 5px;
-    outline: none;
-    transition: background 0.3s;
 }
 
-.slider::-webkit-slider-runnable-track {
-    height: 8px;
-    background: #b87333;
-    border-radius: 5px;
+.slide {
+    min-width: 100%;
+    transition: opacity 0.5s ease-in-out;
 }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
-    background: #783C00;
+.slide img {
+    width: 100%;
+    height: 400px;
+    /* Hoặc tuỳ chỉnh kích thước */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.content_news {
+    background-color: #fff;
+}
+
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    /* Hoặc relative nếu muốn điều chỉnh khác */
+    bottom: 10px;
+    /* Khoảng cách cách slider 10px ở dưới */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background-color: #ffffff;
     border-radius: 50%;
     cursor: pointer;
-    margin-top: -5px;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #e0d358;
 }
 
 .form-check {
@@ -365,124 +567,7 @@ nav ul li.active a {
 }
 
 
-/*slider*/
-
-.container1 {
-    max-width: 1200px;
-    margin: auto;
-    font-family: 'SFU Futura';
-}
-
-#newsCarousel .carousel-item img {
-    border-radius: 8px;
-    object-fit: cover;
-    /* height: 350px; */
-}
-
-#latest-posts-slider {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.slide {
-    display: none;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    transition: opacity 0.5s ease-in-out;
-    width: 617px;
-    height: 376px;
-    font-family: 'SFU Futura';
-}
-
-.slider-container img {
-    width: 517px;
-    height: 376px;
-    object-fit: cover;
-}
-
-.content_news h2 {
-    font-weight: bold;
-}
-
-.slide.active {
-    display: block;
-}
-
-.card .news-card .img {
-    height: 100px;
-}
-
-.card-title {
-    font-size: 20px;
-}
-
-.card-text {
-    font-size: 14px;
-}
-
-.text-muted {
-    font-size: 14px;
-    color: #6c757d;
-}
-
-.tacgia {
-    font-size: 14px;
-    color: #929292;
-}
-
-.dot {
-    height: 8px;
-    width: 8px;
-    background-color: #6c757d;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 5px;
-}
-
-
-/* Responsive Design */
-
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-    }
-    .col-md-6 {
-        width: 100%;
-    }
-    .related-articles {
-        flex-direction: column;
-    }
-}
-
-.news-card {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.news-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    filter: blur(1px) brightness(50%);
-    /* Làm mờ và tối hình */
-}
-
-.news-card .card-body {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    width: 90%;
-}
-
-
-/* list style cf */
+/* list style cf----------------------------------------------------------------- */
 
 .containter_style {
     margin: auto;
@@ -512,115 +597,104 @@ nav ul li.active a {
 }
 
 
-/* Card các quán cần đây */
+/* Card các quán cần đây ------------------------------------------------------*/
 
 .container_nearmes {
-    margin: 40px 0;
+    margin: 24px 0;
+    background-color: #ffffff
 }
 
-.nearme_title {
-    font-size: 22px;
+.content_nearme {
+    display: flex;
+    /* Xếp hàng ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.container_nearmes .icon {
+    width: 30px;
+    height: 30px;
+}
+
+.container_nearmes h2 {
+    font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
 }
 
-.nearme_card {
-    border-radius: 12px;
+.card_nearme {
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+    background: #fff;
 }
 
-.nearme_card:hover {
-    transform: scale(1.05);
-}
-
-.nearme_card img {
-    width: 300px;
-    height: 300px;
+.card_nearme-img {
+    height: 200px;
+    width: 100%;
     object-fit: cover;
-    transition: opacity 0.3s ease-in-out;
-    /* Viền màu xám nhạt */
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.card_nearme-title {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.card_nearme-text {
+    color: #2c2c2c;
+    font-size: 12px;
+    margin-left: 8px;
+}
+
+.card_nearme-star {
     border-radius: 5px;
-    /* Bo góc nhẹ nếu muốn */
+    font-size: 5rem;
 }
 
-.nearme_card:hover img {
-    opacity: 0.7;
+.card_nearme-save {
+    border-radius: 5px;
+    background: #f53d3d;
+    color: #fff;
+    border: none;
+    padding: 0px 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    font-size: 16px;
 }
 
-.badge-near {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #FFA500;
-    color: white;
-    padding: 5px 10px;
-    font-size: 14px;
-    border-radius: 8px;
+.card_nearme:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.nearme_info {
-    padding: 8px;
-    background: white;
-    text-align: left;
+.card_nearme-save:hover {
+    background: #c82a2a;
 }
 
-.nearme_avata img {
-    width: 50px;
-    height: 50px;
+.card_nearme-text .icon_nearme {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.icon_nearme img {
+    height: 20px;
+    width: auto;
+    transition: all 0.3s ease;
+    /* Để icon chuyển mượt hơn khi hover */
+}
+
+.card_nearme-avatar .avatar-img {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ddd;
-    /* Viền mỏng nếu muốn */
 }
 
-.nearme_name {
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.nearme_details {
-    font-size: 12px;
-    color: rgb(55, 55, 55);
-}
-
-.nearme_icon img {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    /* Đảm bảo không bị méo hình */
-    margin-right: 5px;
-    /* Tạo khoảng cách giữa icon và text */
-    vertical-align: middle;
-    /* Canh giữa icon với text */
-}
-
-.nearme_details {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-}
-
-.rating {
-    color: #FFD700;
-    font-size: 20px;
-    transform: scale(1.5);
-    /* Phóng to 1.5 lần */
-    display: inline-block;
-}
-
-.save-btn {
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background 0.3s;
-}
-
-.save-btn:hover {
-    background: #cc0000;
+.heart-icon:hover {
+    transform: scale(1.2);
+    color: #FF4D4D;
 }
