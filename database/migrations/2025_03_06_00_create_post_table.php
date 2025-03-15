@@ -22,6 +22,10 @@ return new class extends Migration
             $table->enum('status', ['Published', 'Draft', 'Deleted'])->default('Draft');
             $table->timestamps();
         });
+
+        
+
+
     }
 
     /**
