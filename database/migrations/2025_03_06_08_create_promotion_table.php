@@ -19,7 +19,8 @@ return new class extends Migration
             $table->decimal('discount_percent', 5, 2);
             $table->decimal('discount_amount', 10, 2);
             $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('end_date')->default(DB::raw('CURRENT_TIMESTAMP'));
+
             $table->timestamps();
         });
     }

@@ -3,39 +3,36 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
         'password',
+        'phone',
+        'avatar_url',
+        'account_type',
     ];
 
-    // Nếu bảng là 'users' thì có thể không cần dòng này
-    protected $table = 'users'; // hoặc 'user' nếu đúng DB bạn dùng
-
+    // Ẩn mật khẩu khi lấy dữ liệu
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-
-    // Quan hệ 1-N: User có nhiều Post
+    // Nếu bạn có quan hệ với bài viết
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
+
+    // Phương thức để lấy URL của ảnh đại diện
+    public function getAvatarUrlAttribute()
+    {
+        return $this->attributes['avatar_url'] ? asset('storage/' . $this->attributes['avatar_url']) : asset('default-avatar.png');
+    }
+    
 }
-?>
