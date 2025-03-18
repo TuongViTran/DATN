@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone', 15)->nullable();
-            $table->string('avatar_url')->nullable(); // Thêm cột avatar_url
-            
+            $table->string('avatar_url')->nullable(); 
+            // $table->string('account_type'); 
             $table->rememberToken();
             $table->timestamps();
         });

@@ -25,8 +25,11 @@ class CoffeeShopController extends Controller
             'likes' => $shop->likes()->count(),
         ]);
     }
-   
+    public function index()
+    {
+        $coffeeshops = CoffeeShop::all();
+        return view('admin.coffeeshops_management', compact('coffeeshops'));
+    }
 }
-
 
 

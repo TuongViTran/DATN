@@ -48,17 +48,17 @@
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="flex items-center text-gray-600 p-3 rounded-lg hover:bg-gray-200 transition">
+                    <a href="{{ route('coffeeshops_management') }}" class="flex items-center text-gray-600 p-3 rounded-lg hover:bg-gray-200 transition">
                             <i class="fas fa-file-alt mr-3"></i> Quản lý bài viết
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="flex items-center text-gray-600 p-3 rounded-lg hover:bg-gray-200 transition">
-                            <i class="fas fa-tags mr-3"></i> Quản lý khuyến mãi
-                        </a>
+                    <a href="{{ route('promotions_management') }}" class="flex items-center text-gray-600 p-3 rounded-lg hover:bg-gray-200 transition">
+    <i class="fas fa-tags mr-3"></i> Quản lý khuyến mãi
+</a>
                     </li>
                     <li class="mb-4">
-                        <a href="#" class="flex items-center text-gray-600 p-3 rounded-lg hover:bg-gray-200 transition">
+                    <a href="{{ route('cafes_management') }}" class="flex items-center text-gray-600 p-3 rounded-lg hover:bg-gray-200 transition">
                             <i class="fas fa-search mr-3"></i> Quản lý tìm kiếm
                         </a>
                     </li>

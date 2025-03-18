@@ -20,8 +20,8 @@ return new class extends Migration {
             
             // Khóa ngoại đến bảng coffeeshop
             $table->foreignId('coffeeshop_id')
-                ->constrained('coffeeshop')
-                ->onDelete('cascade');
+            ->constrained('coffeeshop') // Tên bảng là 'coffeeshop'
+            ->onDelete('cascade');
     
             // Đảm bảo mỗi user chỉ like 1 quán 1 lần
             $table->unique(['user_id', 'coffeeshop_id'], 'unique_user_coffeeshop');

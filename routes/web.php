@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CoffeeShopController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\CafeManagementController;
 
 // Fontend --------------------------------------------
 Route::get('/test-session', function () {
@@ -33,3 +35,11 @@ Route::prefix('user-management')->name('user.')->group(function () {
     Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy'); // Xóa người dùng
     Route::get('/{user}', [UserController::class, 'show'])->name('show'); // Hiển thị thông tin người dùng
 });
+// Định nghĩa route cho trang quản lý quán cà phê
+Route::get('/coffeeshops', [CoffeeShopController::class, 'index'])->name('coffeeshops_management');
+Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions_management');
+// Định nghĩa resource cho quản lý quán cà phê
+Route::resource('cafes', CafeManagementController::class);
+
+// Nếu bạn muốn định nghĩa route cụ thể cho quản lý tìm kiếm
+Route::get('/cafes_management', [CafeManagementController::class, 'index'])->name('cafes_management');
