@@ -19,10 +19,12 @@
 <body>
 
 <header>
-    <!-- Nav -------------------->
+    <!-- Logo -------------------->
     <div class="logo">
         <img src="{{ asset('frontend/images/Logo.svg') }}" alt="Cà Phê Đi Đâu?">
     </div>
+
+    <!-- Navigation -------------------->
     <nav>
         <ul>
             <li class="active">
@@ -30,21 +32,21 @@
                     <span class="icon"><img src="{{ asset('frontend/images/icon_trangchu.svg') }}" alt="Trang chủ"></span>Trang chủ</a>
             </li>
             <li>
-                 <a href="#">
+                <a href="#">
                     <span class="icon"><img src="{{ asset('frontend/images/icon_feed.svg') }}" alt="Feed"></span>Feed</a>
             </li>
             <li>
                 <a href="#">
-                    <span class="icon"><img src="{{ asset('frontend/images/icon_tintuc.svg') }}" alt="TinTuc"></span>Tin Tức </a>
+                    <span class="icon"><img src="{{ asset('frontend/images/icon_tintuc.svg') }}" alt="Tin tức"></span>Tin Tức </a>
             </li>
             <li>
                 <a href="#">
-                        <span class="icon"><img src="{{ asset('frontend/images/icon_thongbao.svg') }}" alt="Thông báo"></span>Thông báo</a>
+                    <span class="icon"><img src="{{ asset('frontend/images/icon_thongbao.svg') }}" alt="Thông báo"></span>Thông báo</a>
             </li>
         </ul>
     </nav>
 
-    <!-- Thời tiết  -------------------->
+    <!-- Thời tiết -------------------->
     <div class="right-section">
         <div class="weather">
             <span class="weather-icon">☀️</span>
@@ -52,13 +54,27 @@
             <span class="weather-info">|</span>
             <div class="date-info">Đang tải ngày...</div>
         </div>
-        
+
+        <!-- Kiểm tra trạng thái đăng nhập -->
         <div class="auth-buttons">
-            <button class="btn btn-primary">Đăng nhập</button>
-            <button class="btn btn-outline">Đăng ký</button>
+            @auth
+                <!-- Nếu đã đăng nhập -->
+                <a href="{{ route('logout') }}" class="btn btn-outline"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    Đăng xuất
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @else
+                <!-- Nếu chưa đăng nhập -->
+                <a href="{{ route('login') }}" class="btn btn-primary">Đăng nhập</a>
+                <a href="{{ route('register') }}" class="btn btn-outline">Đăng ký</a>
+            @endauth
         </div>
     </div>
 </header>
+
 
 <!-- Thanh tìm kiếm -------------------->
     <section class="search-section">

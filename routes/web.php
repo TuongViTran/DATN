@@ -43,3 +43,5 @@ Route::resource('cafes', CafeManagementController::class);
 
 // Nếu bạn muốn định nghĩa route cụ thể cho quản lý tìm kiếm
 Route::get('/cafes_management', [CafeManagementController::class, 'index'])->name('cafes_management');
+
+require __DIR__.'/auth.php';
