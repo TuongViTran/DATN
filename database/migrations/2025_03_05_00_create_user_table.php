@@ -21,6 +21,8 @@ return new class extends Migration
             // $table->string('account_type'); 
             $table->rememberToken();
             $table->timestamps();
+           
+
         });
     }
 

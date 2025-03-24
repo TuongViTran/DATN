@@ -32,9 +32,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', Rule::in(['user', 'owner','admin'])],
+            'role' => ['required', Rule::in(['user', 'owner', 'admin'])],
         ]);
 
         $user = User::create([
@@ -48,7 +48,12 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        return redirect(route('login'))->with('success', 'Đăng ký thành công!');
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard')->with('success', 'Đăng ký thành công! Chào mừng Admin.');
+        } elseif ($user->role === 'owner') {
+            return redirect()->route('cafes_management')->with('success', 'Đăng ký thành công! Chào mừng chủ quán.');
+        } else {
+            return redirect()->route('home')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
+        }
     }
 }
