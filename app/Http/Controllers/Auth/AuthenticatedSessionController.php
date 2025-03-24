@@ -12,7 +12,7 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Hiển thị trang đăng nhập.
      */
     public function create(): View
     {
@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Xử lý yêu cầu đăng nhập.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -28,20 +28,28 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('home', absolute: false));
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard')->with('success', 'Chào mừng Admin.');
+        } elseif ($user->role === 'owner') {
+            return redirect()->route('cafes_management')->with('success', 'Chào mừng chủ quán.');
+        } else {
+            return redirect()->route('home')->with('success', 'Chào mừng bạn.');
+        }
     }
 
     /**
-     * Destroy an authenticated session.
+     * Đăng xuất người dùng.
      */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Bạn đã đăng xuất thành công.');
     }
 }
+

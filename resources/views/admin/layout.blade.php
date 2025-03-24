@@ -30,11 +30,16 @@
     <div class="flex">
         <!-- Sidebar -->
         <div class="w-1/5 bg-white h-screen sticky top-0 shadow-lg p-6 overflow-y-auto">
-            <div class="flex items-center mb-8">
-            <img src="{{ asset('backend/img/Icon (admin)/Logo.svg') }}" alt="Logo">
+        <div class="flex items-center mb-8">
+    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <img src="{{ asset('backend/img/Icon (admin)/Logo.svg') }}" alt="Logo">
+    </a>
 
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+        @csrf
+    </form>
+</div>
 
-            </div>
             <nav>
                 <ul>
                     <li class="mb-4">

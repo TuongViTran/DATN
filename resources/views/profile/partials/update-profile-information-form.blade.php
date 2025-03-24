@@ -1,10 +1,113 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
+<style>
+    .profile-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+}
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+.section-title {
+    font-size: 22px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.section-description {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+.profile-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.verification-message {
+    background: #f8f9fa;
+    padding: 10px;
+    border-left: 4px solid #3498db;
+    margin-top: 10px;
+    border-radius: 6px;
+}
+
+.verification-button {
+    background: none;
+    border: none;
+    color: #2980b9;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.verification-button:hover {
+    color: #1f618d;
+}
+
+.success-message {
+    color: #27ae60;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-button {
+    background: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.save-button:hover {
+    background: #27ae60;
+}
+
+.saved-message {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+</style>
+
+<section class="profile-container">
+    <header>
+        <h2 class="section-title">{{ __('Profile Information') }}</h2>
+        <p class="section-description">
             {{ __("Update your account's profile information and email address.") }}
         </p>
     </header>
@@ -13,33 +116,32 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="profile-form">
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="form-group">
+            <label for="name">{{ __('Name') }}</label>
+            <input id="name" name="name" type="text" class="input-field" 
+                value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
+            <p class="error-message">{{ $errors->first('name') }}</p>
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="form-group">
+            <label for="email">{{ __('Email') }}</label>
+            <input id="email" name="email" type="email" class="input-field" 
+                value="{{ old('email', $user->email) }}" required autocomplete="username">
+            <p class="error-message">{{ $errors->first('email') }}</p>
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
+                <div class="verification-message">
+                    <p>{{ __('Your email address is unverified.') }}</p>
+                    <button form="send-verification" class="verification-button">
+                        {{ __('Click here to re-send the verification email.') }}
+                    </button>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                        <p class="success-message">
                             {{ __('A new verification link has been sent to your email address.') }}
                         </p>
                     @endif
@@ -47,17 +149,14 @@
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="form-actions">
+            <button type="submit" class="save-button">{{ __('Save') }}</button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                <p class="saved-message" x-data="{ show: true }"
+                    x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">
+                    {{ __('Saved.') }}
+                </p>
             @endif
         </div>
     </form>

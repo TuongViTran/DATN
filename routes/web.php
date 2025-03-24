@@ -44,4 +44,14 @@ Route::resource('cafes', CafeManagementController::class);
 // Nếu bạn muốn định nghĩa route cụ thể cho quản lý tìm kiếm
 Route::get('/cafes_management', [CafeManagementController::class, 'index'])->name('cafes_management');
 
+// Điều hướng trang cá nhân đến trang chỉnh sửa
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', function () {
+        return redirect()->route('profile.edit'); // Điều hướng về trang chỉnh sửa
+    })->name('profile');
+
+    Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::delete('/profile', [UserController::class, 'destroyProfile'])->name('profile.destroy'); // Thêm route xóa tài khoản
+});
 require __DIR__.'/auth.php';

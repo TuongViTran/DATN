@@ -55,24 +55,57 @@
             <div class="date-info">Đang tải ngày...</div>
         </div>
 
-        <!-- Kiểm tra trạng thái đăng nhập -->
-        <div class="auth-buttons">
-            @auth
-                <!-- Nếu đã đăng nhập -->
-                <a href="{{ route('logout') }}" class="btn btn-outline"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    Đăng xuất
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            @else
-                <!-- Nếu chưa đăng nhập -->
-                <a href="{{ route('login') }}" class="btn btn-primary">Đăng nhập</a>
-                <a href="{{ route('register') }}" class="btn btn-outline">Đăng ký</a>
-            @endauth
+       <!-- Kiểm tra trạng thái đăng nhập -->
+       <div class="auth-buttons">
+    @auth
+        <!-- Nếu đã đăng nhập -->
+        <div class="user-menu" id="user-menu">
+            <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('frontend/images/default_avatar.jpg') }}" 
+                 alt="Avatar" class="user-avatar" id="avatar">
+            <span class="user-name">{{ Auth::user()->full_name }}</span>
+            <ul class="dropdown-menu" id="dropdown-menu">
+                <li><a href="{{ route('profile') }}">Trang cá nhân</a></li>
+                <li>
+                    <a href="{{ route('logout') }}" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Đăng xuất
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    @else
+        <!-- Nếu chưa đăng nhập -->
+        <a href="{{ route('login') }}" class="btn btn-primary">Đăng nhập</a>
+        <a href="{{ route('register') }}" class="btn btn-outline">Đăng ký</a>
+    @endauth
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const avatar = document.getElementById("avatar");
+        const dropdownMenu = document.getElementById("dropdown-menu");
+
+        avatar.addEventListener("click", function (event) {
+            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+            event.stopPropagation(); // Ngăn chặn sự kiện click lan ra ngoài
+        });
+
+        // Ẩn dropdown khi click ra ngoài
+        document.addEventListener("click", function () {
+            dropdownMenu.style.display = "none";
+        });
+
+        // Giữ dropdown mở nếu click vào nó
+        dropdownMenu.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    });
+
+</script>
+
 </header>
 
 

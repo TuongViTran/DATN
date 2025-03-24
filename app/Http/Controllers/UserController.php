@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -102,4 +103,39 @@ class UserController extends Controller
     {
         return view('admin.show_user', compact('user')); // Tạo view cho thông tin người dùng
     }
+    public function editProfile()
+    {
+        $user = Auth::user(); // Lấy thông tin người dùng đang đăng nhập
+        return view('profile.edit', compact('user')); // Hiển thị trang chỉnh sửa hồ sơ
+    }
+    
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user(); // Lấy thông tin người dùng hiện tại
+    
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'phone' => 'nullable|string|max:15',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+    
+        dd($user);
+        // Cập nhật thông tin người dùng
+        $user->update( $request->only('full_name', 'email', 'phone'));
+    
+        // Xử lý ảnh đại diện nếu có
+        if ($request->hasFile('avatar')) {
+            // Xóa ảnh cũ nếu có
+            if ($user->avatar_url) {
+                Storage::disk('public')->delete($user->avatar_url);
+            }
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar_url = $path;
+            $user->save();
+        }
+    
+        return redirect()->route('profile.edit')->with('success', 'Cập nhật hồ sơ thành công.');
+    }
+    
 }
