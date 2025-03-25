@@ -40,6 +40,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'account_type' => 'user', // Thêm giá trị mặc định
             'role' => $request->role,
