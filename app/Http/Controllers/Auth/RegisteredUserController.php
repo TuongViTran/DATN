@@ -35,19 +35,32 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', Rule::in(['user', 'owner', 'admin'])],
+            'phone' => ['required', 'string', 'max:15'],
+            'avatar_url' => ['nullable', 'image', 'max:2048'], // Thêm quy tắc xác thực cho trường avatar_url
         ]);
-
-        $user = User::create([
+    
+        // Khởi tạo mảng dữ liệu người dùng
+        $userData = [
             'full_name' => $request->full_name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'account_type' => 'user', // Thêm giá trị mặc định
+            'account_type' => 'user',
             'role' => $request->role,
-        ]);
-
+            'phone' => $request->phone,
+        ];
+    
+        // Xử lý ảnh nếu có
+        if ($request->hasFile('avatar_url')) {
+            $avatarPath = $request->file('avatar_url')->store('avatars', 'public'); // Lưu ảnh vào thư mục public/avatars
+            $userData['avatar_url'] = $avatarPath; // Lưu đường dẫn ảnh vào mảng dữ liệu người dùng
+        }
+    
+        // Tạo người dùng với dữ liệu đã bao gồm avatar_url
+        $user = User::create($userData);
+    
         event(new Registered($user));
-
+    
         Auth::login($user);
         if ($user->role === 'admin') {
             return redirect()->route('dashboard')->with('success', 'Đăng ký thành công! Chào mừng Admin.');

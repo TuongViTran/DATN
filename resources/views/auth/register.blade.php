@@ -33,7 +33,7 @@
     <div class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="p-8 md:w-1/2 flex flex-col items-center justify-center bg-[#fefcbf]">
             <h1 class="text-2xl font-bold mb-4 text-center">
-                Xin chào ! Chúng tôi hỗ trợ tìm kiếm quán cà phê
+                Xin chào! Chúng tôi hỗ trợ tìm kiếm quán cà phê
             </h1>
             <img alt="Illustration of a person making coffee" class="w-64 h-64" height="300" src="" width="300"/>
         </div>
@@ -51,7 +51,7 @@
             <h3 class="text-xl font-semibold mb-6 text-center">
                 Đăng ký
             </h3>
-            <form action="{{ route('register') }}" method="POST">
+            <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data"> <!-- Thêm enctype để xử lý file upload -->
                 @csrf
                 <div class="mb-4">
                     <label class="block text-gray-700 font-semibold mb-2" for="full_name">
@@ -73,32 +73,34 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 font-semibold mb-2" for="phone">
-                        Phone no.
+                        Số điện thoại
                     </label>
                     <div class="relative">
-                        <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="phone" name="phone" placeholder="Enter your phone no" type="text" required/>
+                        <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="phone" name="phone" placeholder="Nhập số điện thoại" type="text" required/>
                         <i class="fas fa-phone absolute top-3 right-4 text-gray-400"></i>
                     </div>
-                </div>
-                <div class="mb-6">
+                    <div class="mb-6">
                     <label class="block text-gray-700 font-semibold mb-2" for="password">
-                        Password
+                        Mật khẩu
                     </label>
                     <div class="relative">
-                        <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="password" name="password" placeholder="Enter your password" type="password" required/>
+                        <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="password" name="password" placeholder="Nhập mật khẩu" type="password" required/>
                         <i class="fas fa-lock absolute top-3 right-4 text-gray-400"></i>
                     </div>
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 font-semibold mb-2" for="password_confirmation">
-                         confirm password
+                        Xác nhận mật khẩu
                     </label>
                     <div class="relative">
-                        <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="password_confirmation" name="password_confirmation" placeholder="confirm password" type="password" required/>
+                        <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="password_confirmation" name="password_confirmation" placeholder="Xác nhận mật khẩu" type="password" required/>
                         <i class="fas fa-lock absolute top-3 right-4 text-gray-400"></i>
                     </div>
                 </div>
-
+                <div class="mb-4">
+                    <label for="avatar_url" class="block text-gray-700 font-semibold mb-2">Ảnh đại diện</label>
+                    <input id="avatar_url" type="file" name="avatar_url" accept="image/*" class="block w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500"/>
+                </div>
                 <div class="mt-4">
                     <label for="role" class="block text-gray-700 font-semibold mb-2">Loại tài khoản</label>
                     <select id="role" name="role" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
@@ -115,10 +117,10 @@
                     Đăng ký
                 </button>
                 @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger mt-4">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                <li class="text-red-500">{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -126,14 +128,14 @@
             </form>
             <div class="text-center mt-4">
                 <span class="text-gray-600">
-                    - or -
+                    - hoặc -
                 </span>
             </div>
             <div class="text-center mt-4">
                 <span class="text-gray-600">
-                    Bạn đã có tài khoản ?
+                    Bạn đã có tài khoản?
                     <a class="text-yellow-500 font-semibold" href="{{ route('login') }}">
-                        Đăng nhập ngay !
+                        Đăng nhập ngay!
                     </a>
                 </span>
             </div>
