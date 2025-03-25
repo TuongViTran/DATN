@@ -13,7 +13,7 @@ class Coffeeshop extends Model
     protected $table = 'coffeeshop';
 
     protected $fillable = [
-        'shop_name', 'phone', 'description', 'address_id',
+        'shop_name', 'phone', 'user_id', 'description', 'address_id',
         'status', 'opening_time', 'closing_time', 'parking',
         'wifi_password', 'hotline', 'rating', 'likes',
         'min_price', 'max_price', 'styles_id', 'social_network_id',
@@ -22,7 +22,7 @@ class Coffeeshop extends Model
     ];
       // Quan hệ tới bảng địa chỉ
       public function address() {
-        return $this->belongsTo(Address::class);
+        return $this->belongsTo(Address::class, 'address_id', 'id');
     }
 
     // Quan hệ tới user (chủ quán)
@@ -39,8 +39,16 @@ class Coffeeshop extends Model
          return $this->hasMany(Like::class,'coffeeshop_id');
      }
      
+     public function menu()
+    {
+        return $this->hasMany(Menu::class, 'shop_id', 'id');
+    }
     
-
     
+    // Quan hệ với bảng mạng xã hội
+    public function socialNetworks()
+    {
+        return $this->hasMany(SocialNetwork::class, 'coffeeshop_id');
+    }
 }
 ?>

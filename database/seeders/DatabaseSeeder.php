@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
             [
                 'shop_name' => '𝑪𝒉𝒖𝒚𝒆̣̂𝒏 Coffee',
                 'phone' => '0909234567',
-                'user_id' => 2,
+                'user_id' => 3,
                 'description' => '𝑪𝒉𝒖𝒚𝒆̣̂𝒏 nép mình ở một góc phố bình lặng, dưới hàng cây cao lớn, mang nét Việt giản đơn và ấm áp. Gian nhà mái ngói của 𝑪𝒉𝒖𝒚𝒆̣̂𝒏 đã ngập tràn không khí Xuân,
                  trang trí đơn giản mà hợp vibes, với đầy sắc đỏ may mắn',
                 'address_id' => 2,

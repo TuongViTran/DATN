@@ -9,7 +9,7 @@ class Address extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['coffee_shop_id', 'street'];
+    protected $fillable = [ 'street', 'ward', 'district', 'city','country', 'postal_code'];
 
     public function coffeeShop()
     {

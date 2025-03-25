@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CafeManagementController;
+use App\Http\Controllers\OwnerController;
+
 
 // Fontend --------------------------------------------
 Route::get('/test-session', function () {
@@ -35,6 +37,7 @@ Route::prefix('user-management')->name('user.')->group(function () {
     Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy'); // Xóa người dùng
     Route::get('/{user}', [UserController::class, 'show'])->name('show'); // Hiển thị thông tin người dùng
 });
+
 // Định nghĩa route cho trang quản lý quán cà phê
 Route::get('/coffeeshops', [CoffeeShopController::class, 'index'])->name('coffeeshops_management');
 Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions_management');
@@ -55,3 +58,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [UserController::class, 'destroyProfile'])->name('profile.destroy'); // Thêm route xóa tài khoản
 });
 require __DIR__.'/auth.php';
+
+
+// Owner Management Routes
+Route::get('/owner/{id}', [OwnerController::class, 'owner'])->name('owner'); // lấy thông tin của chủ quán
+Route::get('/owner/{id}', [OwnerController::class, 'showByOwner'])->name('owner.coffeeshop'); //hiển thị quán cafe theo id của chủ quán
+Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.update'); // cập nhật menu
+Route::get('/owner/{id}', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
+Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
+
