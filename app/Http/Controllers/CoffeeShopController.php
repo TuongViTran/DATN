@@ -30,6 +30,48 @@ class CoffeeShopController extends Controller
         $coffeeshops = CoffeeShop::all();
         return view('admin.coffeeshops_management', compact('coffeeshops'));
     }
+    
+    /**
+     * Hiển thị chi tiết quán coffee.
+     */
+    public function show($id)
+    {
+        // Tìm quán coffee theo ID, đồng thời lấy cả danh sách đánh giá
+        $coffeeShop = CoffeeShop::with('reviews')->findOrFail($id);
+
+        return view('owner.index', compact('coffeeShop'));
+    }
+
+    /**
+     * Xử lý lưu đánh giá từ người dùng.
+     */
+    public function storeReview(Request $request, $id)
+    {
+        // Validate dữ liệu đầu vào
+        $request->validate([
+            'content' => 'required|string|max:500',
+            'rating' => 'required|integer|min:1|max:5',
+            'img_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Lưu ảnh nếu có
+        $imgPath = null;
+        if ($request->hasFile('img_url')) {
+            $imgPath = $request->file('img_url')->store('reviews', 'public');
+        }
+
+        // Thêm đánh giá vào database
+        Review::create([
+            'user_id' => auth()->id(), // Lấy ID người dùng đăng nhập
+            'shop_id' => $id,
+            'content' => $request->content,
+            'rating' => $request->rating,
+            'img_url' => $imgPath,
+            'likes_count' => 0,
+        ]);
+
+        return redirect()->back()->with('success', 'Đánh giá của bạn đã được gửi.');
+    }
 }
 
 

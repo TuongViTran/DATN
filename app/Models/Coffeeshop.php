@@ -50,5 +50,10 @@ class Coffeeshop extends Model
     {
         return $this->hasMany(SocialNetwork::class, 'coffeeshop_id');
     }
+    public function reviews ()
+{
+    return $this->hasMany(Review::class, 'shop_id');
+}
+
 }
 ?>

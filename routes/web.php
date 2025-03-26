@@ -67,3 +67,7 @@ Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.
 Route::get('/owner/{id}', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
 Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
 
+
+use App\Http\Controllers\ReviewController;
+
+Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');

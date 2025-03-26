@@ -199,6 +199,7 @@
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -229,6 +230,7 @@
     </div>
 
 
+
                       
                         <!-- JS để xử lý mở modal chỉnh sửa -->
 <script>
@@ -253,7 +255,9 @@
         }, 300);
     });
 </script>
+
                         <!-- Button mở Modal -->
+                         
 <button type="button" class="btn btn-secondary px-4" data-bs-toggle="modal" data-bs-target="#editModal">
     Chỉnh sửa
 </button>
@@ -360,6 +364,101 @@
     </div>
 </div>
 
+<!-- -->
+
+
+
+
+
+   <!-- Nút Đánh giá -->
+   <div class="mt-3 d-flex gap-3">
+            
+   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                Đánh giá quán
+            </button>
+           
+        </div>
+    </div>
+
+    <!-- Hiển thị danh sách đánh giá -->
+    <h5 class="fw-bold mt-4">Đánh giá từ người dùng</h5>
+    @if ($coffeeShop->review && $coffeeShop->review->count() > 0)
+
+        @foreach ($coffeeShop->reviews as $review)
+            <div class="border p-3 my-2">
+                <strong>{{ $review->user->name }}</strong>
+                <div class="d-flex align-items-center gap-1">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="fa{{ $i <= $review->rating ? '-solid' : '-thin' }} fa-star" style="color: #FFD43B;"></i>
+                    @endfor
+                    <span class="text-secondary">({{ $review->rating }}/5)</span>
+                </div>
+                <p>{{ $review->content }}</p>
+            </div>
+        @endforeach
+    @else
+        <p class="text-muted">Chưa có đánh giá nào.</p>
+    @endif
+</div>
+
+<!-- Modal Đánh Giá -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Tiêu đề -->
+            <div class="modal-header">
+                <h5 class="modal-title">Đánh giá quán: {{ $coffeeShop->shop_name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Form Đánh Giá -->
+            <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="shop_id" value="{{ $coffeeShop->id }}">
+
+                <div class="modal-body">
+                    <!-- Tên quán -->
+                    <p><strong>Quán:</strong> {{ $coffeeShop->shop_name }}</p>
+
+                    <!-- Chọn số sao -->
+                    <label class="form-label">Đánh giá sao:</label>
+                    <select class="form-control" name="rating" required>
+                        <option value="5">⭐⭐⭐⭐⭐ - Xuất sắc</option>
+                        <option value="4">⭐⭐⭐⭐ - Tốt</option>
+                        <option value="3">⭐⭐⭐ - Bình thường</option>
+                        <option value="2">⭐⭐ - Tệ</option>
+                        <option value="1">⭐ - Rất tệ</option>
+                    </select>
+
+                    <!-- Nội dung đánh giá -->
+                    <label class="form-label mt-2">Nội dung đánh giá:</label>
+                    <textarea class="form-control" name="content" rows="3" placeholder="Viết cảm nhận của bạn..." required></textarea>
+
+                    <!-- Ảnh đánh giá -->
+                    <label class="form-label mt-2">Hình ảnh:</label>
+                    <input type="file" class="form-control" name="img_url" accept="image/*">
+
+                    <!-- Ngày đánh giá (hiển thị nhưng không chỉnh sửa) -->
+                    <p class="mt-2 text-muted"><i class="bi bi-calendar"></i> Ngày đánh giá: {{ now()->format('d/m/Y') }}</p>
+                </div>
+
+                <!-- Nút Gửi -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Gửi đánh giá</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- -->
 
                     </div>
 
