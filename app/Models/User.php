@@ -19,6 +19,7 @@ class User extends Authenticatable
         'role',
         'phone',
         'avatar_url', // Thêm trường avatar_url vào đây
+        'gender',
     ];
     protected $hidden = [
         'password',

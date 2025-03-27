@@ -61,12 +61,12 @@
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Mật khẩu</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <i class="fas fa-lock text-gray-400"></i>
                         </span>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 pl-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" placeholder="Enter your password" type="password" required/>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 pl-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" placeholder="Nhập mật khẩu" type="password" required/>
                     </div>
                 </div>
                 <div class="flex items-center justify-between mb-6">

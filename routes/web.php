@@ -10,7 +10,6 @@ use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CafeManagementController;
 use App\Http\Controllers\OwnerController;
 
-
 // Fontend --------------------------------------------
 Route::get('/test-session', function () {
     Session::put('test_key', 'Hello Session');
@@ -25,10 +24,10 @@ Route::post('/like-shop/{id}', [CoffeeShopController::class, 'like'])->name('sho
 
 Route::get('/dashboard', function () {
     return view('backend.admin.dashboard'); // Chỉ định đường dẫn đầy đủ đến view
-})->name('dashboard');
+})->name('dashboard')->middleware(['auth', 'role:admin']); // Chỉ admin mới vào được
 
 // User Management Routes
-Route::prefix('user-management')->name('user.')->group(function () {
+Route::prefix('user-management')->name('user.')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('management'); // Hiển thị danh sách người dùng
     Route::get('/create', [UserController::class, 'create'])->name('create'); // Hiển thị form thêm mới người dùng
     Route::post('/', [UserController::class, 'store'])->name('store'); // Lưu người dùng mới
@@ -44,7 +43,6 @@ Route::get('/promotions', [PromotionController::class, 'index'])->name('promotio
 // Định nghĩa resource cho quản lý quán cà phê
 Route::resource('cafes', CafeManagementController::class);
 
-
 Route::get('/cafes_management', [CafeManagementController::class, 'index'])->name('cafes_management');
 
 // Điều hướng trang cá nhân đến trang chỉnh sửa
@@ -59,12 +57,11 @@ Route::middleware(['auth'])->group(function () {
 });
 require __DIR__.'/auth.php';
 
-
-// Owner Management Routes
-Route::get('/owner/{id}', [CoffeeShopController::class, 'show']);
-
-Route::get('/owner/{id}', [OwnerController::class, 'owner'])->name('owner'); // lấy thông tin của chủ quán
-Route::get('/owner/{id}', [OwnerController::class, 'showByOwner'])->name('owner.coffeeshop'); //hiển thị quán cafe theo id của chủ quán
-Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.update'); // cập nhật menu
-Route::get('/owner/{id}', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
-Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
+// Owner Management Routes - Chỉ chủ quán mới được vào
+Route::middleware(['auth', 'role:owner'])->group(function () {
+    Route::get('/owner/{id}', [OwnerController::class, 'owner'])->name('owner'); // lấy thông tin của chủ quán
+    Route::get('/owner/{id}/coffeeshops', [OwnerController::class, 'showByOwner'])->name('owner.coffeeshop'); //hiển thị quán cafe theo id của chủ quán
+    Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.update'); // cập nhật menu
+    Route::get('/owner/{id}/info', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
+    Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
+});

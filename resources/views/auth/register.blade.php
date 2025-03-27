@@ -81,7 +81,7 @@
                     </div>
                     <div class="mb-6">
                     <label class="block text-gray-700 font-semibold mb-2" for="password">
-                        Mật khẩu
+                        Mật Khẩu
                     </label>
                     <div class="relative">
                         <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="password" name="password" placeholder="Nhập mật khẩu" type="password" required/>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 font-semibold mb-2" for="password_confirmation">
-                        Xác nhận mật khẩu
+                         Xác nhận mật khẩu
                     </label>
                     <div class="relative">
                         <input class="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500" id="password_confirmation" name="password_confirmation" placeholder="Xác nhận mật khẩu" type="password" required/>
@@ -106,13 +106,28 @@
                     <select id="role" name="role" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
                         <option value="user">Khách hàng</option>
                         <option value="owner">Chủ cửa hàng</option>
-                        <option value="admin">Admin</option>
+                        <!-- <option value="admin">Admin</option> -->
                     </select>
                     @error('role')
                         <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                     @enderror
                 </div>
-
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-2">Giới tính</label>
+                    <div class="flex">
+                        <label class="mr-4">
+                            <input type="radio" name="gender" value="male" required>
+                            Nam
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female" required>
+                            Nữ
+                        </label>
+                    </div>
+                    @error('gender')
+                        <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
                 <button class="w-full bg-yellow-500 text-white py-2 rounded-full font-semibold hover:bg-yellow-600 transition duration-200 mt-6" type="submit">
                     Đăng ký
                 </button>

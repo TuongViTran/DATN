@@ -78,9 +78,9 @@ label {
 
 <section class="password-container">
     <header>
-        <h2 class="section-title">{{ __('Update Password') }}</h2>
+        <h2 class="section-title">{{ __('Cập nhật mật khẩu') }}</h2>
         <p class="section-description">
-            {{ __('Ensure your account is using a long, random password to stay secure.') }}
+            {{ __('Hãy đảm bảo tài khoản của bạn đang sử dụng một mật khẩu dài và ngẫu nhiên để tăng cường bảo mật.') }}
         </p>
     </header>
 
@@ -89,32 +89,34 @@ label {
         @method('put')
 
         <div class="form-group">
-            <label for="update_password_current_password">{{ __('Current Password') }}</label>
+            <label for="update_password_current_password">{{ __('Mật khẩu hiện tại') }}</label>
             <input id="update_password_current_password" name="current_password" type="password" class="input-field" autocomplete="current-password">
             <p class="error-message">{{ $errors->updatePassword->first('current_password') }}</p>
         </div>
 
         <div class="form-group">
-            <label for="update_password_password">{{ __('New Password') }}</label>
+            <label for="update_password_password">{{ __('Mật khẩu mới') }}</label>
             <input id="update_password_password" name="password" type="password" class="input-field" autocomplete="new-password">
             <p class="error-message">{{ $errors->updatePassword->first('password') }}</p>
         </div>
 
         <div class="form-group">
-            <label for="update_password_password_confirmation">{{ __('Confirm Password') }}</label>
+            <label for="update_password_password_confirmation">{{ __('Xác nhận mật khẩu') }}</label>
             <input id="update_password_password_confirmation" name="password_confirmation" type="password" class="input-field" autocomplete="new-password">
             <p class="error-message">{{ $errors->updatePassword->first('password_confirmation') }}</p>
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="save-button">{{ __('Save') }}</button>
+            <button type="submit" class="save-button">{{ __('Lưu') }}</button>
 
             @if (session('status') === 'password-updated')
                 <p class="saved-message" x-data="{ show: true }"
                     x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">
-                    {{ __('Saved.') }}
+                    {{ __('Đã lưu.') }}
                 </p>
             @endif
         </div>
     </form>
 </section>
+
+
