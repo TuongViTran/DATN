@@ -8,17 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Review extends Model
 {
     use HasFactory;
-    protected $table = 'review';
 
-    protected $fillable = ['user_id', 'shop_id', 'content', 'rating', 'likes_count'];
+    protected $table = 'review'; // Tên bảng đánh giá
+    protected $fillable = ['user_id', 'shop_id', 'content', 'rating', 'img_url', 'likes_count'];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function coffeeShop()
+    public function shop()
     {
         return $this->belongsTo(CoffeeShop::class, 'shop_id');
     }
 }
+

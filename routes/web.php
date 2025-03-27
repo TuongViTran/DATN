@@ -61,6 +61,8 @@ require __DIR__.'/auth.php';
 
 
 // Owner Management Routes
+Route::get('/owner/{id}', [CoffeeShopController::class, 'show']);
+
 Route::get('/owner/{id}', [OwnerController::class, 'owner'])->name('owner'); // lấy thông tin của chủ quán
 Route::get('/owner/{id}', [OwnerController::class, 'showByOwner'])->name('owner.coffeeshop'); //hiển thị quán cafe theo id của chủ quán
 Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.update'); // cập nhật menu
@@ -70,4 +72,14 @@ Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name(
 
 use App\Http\Controllers\ReviewController;
 
-Route::post('/review/store', [ReviewController::class, 'store'])->name('review.store');
+Route::post('/reviews', [ReviewController::class, 'store'])
+    ->name('review.store')
+    ->middleware('auth');
+
+    use Illuminate\Http\Request;
+
+Route::get('/login', function (Request $request) {
+    session(['url.intended' => $request->query('redirect', url()->previous())]);
+    return view('auth.login');
+})->name('login');
+

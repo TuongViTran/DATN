@@ -37,9 +37,18 @@ class CoffeeShopController extends Controller
     public function show($id)
     {
         // Tìm quán coffee theo ID, đồng thời lấy cả danh sách đánh giá
-        $coffeeShop = CoffeeShop::with('reviews')->findOrFail($id);
+        $coffeeShop = CoffeeShop::with('reviews.user')->findOrFail($id);
+        $reviews = Review::where('shop_id', $id)
+        ->with('user') // Nếu có mối quan hệ với bảng users
+        ->orderBy('created_at', 'desc')
+        ->get();
 
-        return view('owner.index', compact('coffeeShop'));
+        dd($reviews->toArray()); // In ra danh sách đánh giá và dừng chương trình
+
+        
+        return view('owner.index', compact('coffeeShop', 'reviews'));
+
+        
     }
 
     /**
@@ -72,6 +81,7 @@ class CoffeeShopController extends Controller
 
         return redirect()->back()->with('success', 'Đánh giá của bạn đã được gửi.');
     }
+    
 }
 
 

@@ -70,4 +70,9 @@ class RegisteredUserController extends Controller
             return redirect()->route('home')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
         }
     }
+
+    protected function authenticated(Request $request, $user)
+{
+    return redirect(session()->pull('url.intended', route('home')));
+}
 }
