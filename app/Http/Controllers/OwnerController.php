@@ -18,7 +18,7 @@ class OwnerController extends Controller
         $owners = User::where('account_type', 'owner')->get();
 
         // Trả về view và truyền danh sách chủ quán vào
-        return view('owner.index', ['owners' => $owners, 'id' => $id]);
+        return view('frontend.owner ', ['owners' => $owners, 'id' => $id]);
     }
 
     public function showByOwner($id)
@@ -30,7 +30,7 @@ class OwnerController extends Controller
             return abort(404, "Không tìm thấy quán cà phê của chủ sở hữu này.");
         }
 
-        return view('owner.index', compact('coffeeShop'));
+        return view('frontend.owner ', compact('coffeeShop'));
     }
 
     public function update(Request $request, $id)
@@ -74,7 +74,7 @@ class OwnerController extends Controller
                 return abort(404, "Không tìm thấy quán cà phê của chủ sở hữu này.");
             }
         
-            return view('owner.index', compact('coffeeShop'));
+            return view('frontend.owner ', compact('coffeeShop'));
         }
 
 

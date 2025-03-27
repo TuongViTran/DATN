@@ -47,14 +47,15 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
+        
+        // Điều hướng các trang 
         Auth::login($user);
         if ($user->role === 'admin') {
             return redirect()->route('dashboard')->with('success', 'Đăng ký thành công! Chào mừng Admin.');
         } elseif ($user->role === 'owner') {
             return redirect()->route('cafes_management')->with('success', 'Đăng ký thành công! Chào mừng chủ quán.');
         } else {
-            return redirect()->route('home')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
+            return redirect()->route('trangchu')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
         }
     }
 }

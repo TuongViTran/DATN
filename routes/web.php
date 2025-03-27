@@ -16,8 +16,13 @@ Route::get('/test-session', function () {
     Session::put('test_key', 'Hello Session');
     return 'Session đã được ghi!';
 });
+Route::get('/', [HomeController::class, 'trangchu'])->name('trangchu');
+Route::get('/feed', [HomeController::class, 'feed'])->name('feed');
+Route::get('/tintuc', [HomeController::class, 'tintuc'])->name('tintuc');
+Route::get('/thongbao', [HomeController::class, 'thongbao'])->name('thongbao');
+Route::get('/user', [HomeController::class, 'user'])->name('user');
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 // Backend --------------------------------------------
 

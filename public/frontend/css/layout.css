@@ -154,6 +154,23 @@ nav ul li.active a {
     color: #555;
 }
 
+.user-name {
+    gap: 10px;
+    font-weight: bold;
+    /* text-transform: uppercase; */
+    /* Thêm thuộc tính viết hoa */
+}
+
+.user-role {
+    background: #DDE5B6;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+    color: #333;
+}
+
 
 /* Auth Buttons */
 
@@ -706,7 +723,8 @@ nav ul li.active a {
 }
 
 .user-avatar {
-    width: 40px; /* Kích thước nhỏ hơn */
+    width: 40px;
+    /* Kích thước nhỏ hơn */
     height: 40px;
     border-radius: 50%;
     object-fit: cover;

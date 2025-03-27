@@ -1,25 +1,6 @@
-
-<!-- resources/views/frontend/layout.blade.php -->
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@yield('title', 'Owner')</title>
-<link rel="stylesheet" href="{{ asset('frontend/css/layout.css') }}">
-<link rel="stylesheet" href="{{ asset('frontend/css/footer.css') }}">
-<!-- Bootstrap CSS -->
-<!-- Bootstrap 5.1.3 JS (Bundle includes Popper.js) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/24875ac8f5.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    
+@extends('frontend.layoutuser')
+@section('title', 'Owner')
+@section('content')
 @if(session('success'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     {{ session('success') }}
@@ -35,46 +16,7 @@
         </ul>
     </div>
 @endif
-<header>
-
-
-    <!-- Nav -------------------->
-    <div class="logo">
-        <img src="{{ asset('frontend/images/Logo.svg') }}" alt="Cà Phê Đi Đâu?">
-    </div>
-    <nav>
-        <ul>
-            <li class="active">
-                <a href="#">
-                    <span class="icon"><img src="{{ asset('frontend/images/icon_trangchu.svg') }}" alt="Trang chủ"></span>Trang chủ</a>
-            </li>
-            <li>
-                 <a href="#">
-                    <span class="icon"><img src="{{ asset('frontend/images/icon_feed.svg') }}" alt="Feed"></span>Feed</a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><img src="{{ asset('frontend/images/icon_tintuc.svg') }}" alt="TinTuc"></span>Tin Tức </a>
-            </li>
-            <li>
-                <a href="#">
-                        <span class="icon"><img src="{{ asset('frontend/images/icon_thongbao.svg') }}" alt="Thông báo"></span>Thông báo</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Role  -------------------->
-    <div class="right-section">
-        <button class="btn btn-warning text-white">Chủ Quán</button>       
-        <div class="in4">
-            <img src="{{ asset('frontend/images/avt.png') }}" class="img-fluid rounded-circle" alt="avt" width="60" height="60" style="box-shadow: 0 0 25px 0 rgba(88, 79, 79, 0.1);">
-            <span class="ms-2 fw-bold">Tường Vi</span>
-        </div>
-    </div>
-</header>
-
-    <main>
-    <main class="container mt-4">
+<div class="container mt-4">
         <div class="p-4 rounded shadow-sm mb-4 d-flex align-items-center justify-content-around" style="background: linear-gradient(to bottom,rgb(241, 215, 180), #fbc2eb00);">
             <!-- Cột bên trái: Ảnh đại diện + Thông tin quán -->
             <div class="d-flex flex-column align-items-center">
@@ -117,13 +59,12 @@
                 <!-- Bên trái: Hình ảnh -->
                 <div class="flex-shrink-0">
                     <!-- Ảnh lớn (Hình chữ nhật) -->
-                    <img src="{{asset('frontend/images/' . $coffeeShop->cover_image)}}" 
-                        alt="Quán Ngày Bình Yên" class="rounded" 
-                        style="width: 380px; height: 250px; object-fit: cover;">
-                    
+                    <img src="{{ asset('frontend/images/chuyen1.jpg') }}" 
+                    alt="Ảnh lớn" 
+                    style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
                     <!-- Ảnh nhỏ (Hình vuông) -->
-                    <div class="mt-3 d-flex justify-content-between" style="max-width: 380px;">
-                        <img src="{{asset('frontend/images/' . $coffeeShop->image_1)}}" 
+                     <div class="mt-3 d-flex justify-content-between" style="max-width: 380px;">
+                        <img src="{{asset('frontend/images/'. $coffeeShop->image_1)}}" 
                             alt="Image 1" class="rounded" 
                             style="width: 32%; height: 110px; object-fit: cover;">
                         <img src="{{asset('frontend/images/' . $coffeeShop->image_2)}}" 
@@ -459,64 +400,9 @@
             </div>
         </div>
     </div>
-</main>
-    </main>
+</div>
 
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-              <img src="{{ asset('frontend/images/Logo.svg') }}" alt="caphedidau" class="icon">
-            </div>
-            <div class="footer-links">
-                <div class="footer-column">
-                    <h3>Về website</h3>
-                    <ul>
-                        <li><a href="#">Cách đặt chỗ</a></li>
-                        <li><a href="#">Hỗ trợ</a></li>
-                        <li><a href="#">Liên hệ chúng tôi</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Dịch vụ khách hàng</h3>
-                    <ul>
-                        <li><a href="#">Câu hỏi thường gặp</a></li>
-                        <li><a href="#">Chính sách chúng tôi</a></li>
-                        <li><a href="#">Quyền lợi khách hàng</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Kênh kết nối</h3>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">YouTube</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column update-section">
-                    <h3><strong>LUÔN CẬP NHẬT</strong></h3>
-                    <p>Về các tin tức đồ uống, sản phẩm mới</p>
-                    <div class="subscribe">
-                        <input type="email" placeholder="Email">
-                        <button>Đăng ký</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-</body>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let alert = document.querySelector(".alert");
-        if (alert) {
-            setTimeout(() => {
-                alert.classList.add("fade");
-                setTimeout(() => alert.remove(), 500); // Xóa alert khỏi DOM sau khi ẩn
-            }, 3000); // 3 giây
-        }
-    });
-</script>
 
-<script src="{{ asset('frontend/js/seacher.js') }}"></script>
-<script src="{{ asset('frontend/js/date_weather.js') }}"></script>
-</html>
+@endsection
+          

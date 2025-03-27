@@ -39,9 +39,9 @@ return new class extends Migration
     
             // Ảnh: 1 ảnh bìa và 3 ảnh chi tiết
             $table->text('cover_image', 1000)->nullable();
-            $table->text('image_1')->nullable();
-            $table->text('image_2')->nullable();
-            $table->text('image_3')->nullable();
+            $table->text('image_1',225)->nullable();
+            $table->text('image_2',225)->nullable();
+            $table->text('image_3',225)->nullable();
 
             $table->timestamps();
         });

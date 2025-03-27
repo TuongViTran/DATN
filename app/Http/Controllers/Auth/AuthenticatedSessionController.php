@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         } elseif ($user->role === 'owner') {
             return redirect()->route('cafes_management')->with('success', 'Chào mừng chủ quán.');
         } else {
-            return redirect()->route('home')->with('success', 'Chào mừng bạn.');
+            return redirect()->route('trangchu')->with('success', 'Chào mừng bạn.');
         }
     }
 
