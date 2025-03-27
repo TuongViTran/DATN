@@ -68,21 +68,3 @@ Route::get('/owner/{id}', [OwnerController::class, 'showByOwner'])->name('owner.
 Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.update'); // cập nhật menu
 Route::get('/owner/{id}', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
 Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
-
-<<<<<<< HEAD
-
-use App\Http\Controllers\ReviewController;
-
-Route::post('/reviews', [ReviewController::class, 'store'])
-    ->name('review.store')
-    ->middleware('auth');
-
-    use Illuminate\Http\Request;
-
-Route::get('/login', function (Request $request) {
-    session(['url.intended' => $request->query('redirect', url()->previous())]);
-    return view('auth.login');
-})->name('login');
-
-=======
->>>>>>> d1e0bc0 (gộp các file lại vào backend và thêm nút đăng xuất ở admin để về trang đăng ký)
