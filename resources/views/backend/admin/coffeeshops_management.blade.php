@@ -1,5 +1,5 @@
 <!-- resources/views/coffee_management.blade.php -->
-@extends('admin.layout') <!-- Kế thừa layout chính -->
+@extends('backend.admin.layout')
 
 @section('title', 'Quản lý quán cà phê ')
 

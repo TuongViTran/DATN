@@ -28,7 +28,7 @@ class CoffeeShopController extends Controller
     public function index()
     {
         $coffeeshops = CoffeeShop::all();
-        return view('admin.coffeeshops_management', compact('coffeeshops'));
+        return view('backend.admin.coffeeshops_management', compact('coffeeshops'));
     }
     
     /**

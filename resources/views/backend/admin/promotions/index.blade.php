@@ -1,4 +1,5 @@
-@extends('admin.layout')
+@extends('backend.admin.layout')
+
 
 @section('title', 'Quản lý khuyến mãi')
 

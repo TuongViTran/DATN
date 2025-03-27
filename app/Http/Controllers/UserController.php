@@ -13,13 +13,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::withCount('posts')->get(); // Lấy tất cả người dùng cùng với số bài viết
-        return view('admin.user_management', compact('users'));
+        return view('backend.admin.user_management', compact('users'));
     }
 
     // Hiển thị form thêm mới người dùng
     public function create()
     {
-        return view('admin.create_user'); // Tạo view cho form thêm mới
+        return view('backend.admin.create_user'); // Tạo view cho form thêm mới
     }
 
     // Lưu người dùng mới
@@ -56,7 +56,7 @@ class UserController extends Controller
     // Hiển thị form chỉnh sửa người dùng
     public function edit(User $user)
     {
-        return view('admin.edit_user', compact('user')); // Tạo view cho form chỉnh sửa
+        return view('backend.admin.edit_user', compact('user')); // Tạo view cho form chỉnh sửa
     }
 
     // Cập nhật người dùng
@@ -101,7 +101,7 @@ class UserController extends Controller
     // Hiển thị thông tin người dùng
     public function show(User $user)
     {
-        return view('admin.show_user', compact('user')); // Tạo view cho thông tin người dùng
+        return view('backend.admin.show_user', compact('user')); // Tạo view cho thông tin người dùng
     }
     public function editProfile()
     {

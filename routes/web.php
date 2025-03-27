@@ -24,7 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/like-shop/{id}', [CoffeeShopController::class, 'like'])->name('shop.like');
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard'); // Chỉ định đường dẫn đầy đủ đến view
+    return view('backend.admin.dashboard'); // Chỉ định đường dẫn đầy đủ đến view
 })->name('dashboard');
 
 // User Management Routes
@@ -44,7 +44,7 @@ Route::get('/promotions', [PromotionController::class, 'index'])->name('promotio
 // Định nghĩa resource cho quản lý quán cà phê
 Route::resource('cafes', CafeManagementController::class);
 
-// Nếu bạn muốn định nghĩa route cụ thể cho quản lý tìm kiếm
+
 Route::get('/cafes_management', [CafeManagementController::class, 'index'])->name('cafes_management');
 
 // Điều hướng trang cá nhân đến trang chỉnh sửa
@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
     Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
-    Route::delete('/profile', [UserController::class, 'destroyProfile'])->name('profile.destroy'); // Thêm route xóa tài khoản
+    Route::delete('/profile', [UserController::class, 'destroyProfile'])->name('profile.destroy'); 
 });
 require __DIR__.'/auth.php';
 
@@ -69,6 +69,7 @@ Route::put('/menu/update/{id}', [OwnerController::class, 'update'])->name('menu.
 Route::get('/owner/{id}', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
 Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
 
+<<<<<<< HEAD
 
 use App\Http\Controllers\ReviewController;
 
@@ -83,3 +84,5 @@ Route::get('/login', function (Request $request) {
     return view('auth.login');
 })->name('login');
 
+=======
+>>>>>>> d1e0bc0 (gộp các file lại vào backend và thêm nút đăng xuất ở admin để về trang đăng ký)
