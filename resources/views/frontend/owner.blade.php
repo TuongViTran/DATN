@@ -140,6 +140,7 @@
                     </button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -170,6 +171,7 @@
     </div>
 
 
+
                       
                         <!-- JS để xử lý mở modal chỉnh sửa -->
 <script>
@@ -194,7 +196,9 @@
         }, 300);
     });
 </script>
+
                         <!-- Button mở Modal -->
+                         
 <button type="button" class="btn btn-secondary px-4" data-bs-toggle="modal" data-bs-target="#editModal">
     Chỉnh sửa
 </button>
@@ -301,6 +305,121 @@
     </div>
 </div>
 
+<!-- -->
+
+
+
+
+
+   <!-- Nút Đánh giá -->
+   <div class="mt-3 d-flex gap-3">
+            
+   <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                Đánh giá quán
+            </button> -->
+            @if(Auth::check())
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">Viết đánh giá</button>
+@else
+    <a href="{{ route('login', ['redirect' => url()->current()]) }}" class="btn btn-primary">Đăng nhập để đánh giá</a>
+@endif
+        </div>
+    </div>
+
+    <!-- Hiển thị danh sách đánh giá -->
+    <!-- <h3>Đánh giá từ khách hàng</h3>
+
+@if(isset($reviews) && $reviews->count() > 0)
+    @foreach ($reviews as $review)
+        <div class="review-card">
+            <p><strong>{{ $review->user->name ?? 'Người dùng ẩn danh' }}</strong></p>
+            <p>Rating: ⭐ {{ $review->rating }}/5</p>
+            <p>{{ $review->content }}</p>
+            @if ($review->img_url)
+                <img src="{{ $review->img_url }}" alt="Hình ảnh đánh giá" width="200">
+            @endif
+            <p>Ngày đánh giá: {{ \Carbon\Carbon::parse($review->created_at)->format('d/m/Y') }}</p>
+        </div>
+    @endforeach
+@else
+    <p>Chưa có đánh giá nào cho quán này.</p>
+@endif
+</div> -->
+
+
+<!-- Modal Đánh Giá -->
+
+
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Tiêu đề -->
+            <div class="modal-header">
+                <h5 class="modal-title">Đánh giá quán: {{ $coffeeShop->shop_name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Form Đánh Giá -->
+            <form action="{{ route('review.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="shop_id" value="{{ $coffeeShop->id }}">
+
+                <div class="modal-body">
+                    <!-- Tên quán -->
+                    <p><strong>Quán:</strong> {{ $coffeeShop->shop_name }}</p>
+
+                    <!-- Chọn số sao -->
+                    <label class="form-label">Đánh giá sao:</label>
+                    <select class="form-control" name="rating" required>
+                        <option value="5">⭐⭐⭐⭐⭐ - Xuất sắc</option>
+                        <option value="4">⭐⭐⭐⭐ - Tốt</option>
+                        <option value="3">⭐⭐⭐ - Bình thường</option>
+                        <option value="2">⭐⭐ - Tệ</option>
+                        <option value="1">⭐ - Rất tệ</option>
+                    </select>
+
+                    <!-- Nội dung đánh giá -->
+                    <label class="form-label mt-2">Nội dung đánh giá:</label>
+                    <textarea class="form-control" name="content" rows="3" placeholder="Viết cảm nhận của bạn..." required></textarea>
+
+                    <!-- Ảnh đánh giá -->
+                    <label class="form-label mt-2">Hình ảnh:</label>
+                    <input type="file" class="form-control" name="img_url" accept="image/*">
+                    @error('img_url')
+    <span class="text-danger">{{ $message }}</span>
+@enderror
+
+                    <!-- Ngày đánh giá (hiển thị nhưng không chỉnh sửa) -->
+                    <p class="mt-2 text-muted"><i class="bi bi-calendar"></i> Ngày đánh giá: {{ now()->format('d/m/Y') }}</p>
+                </div>
+
+                <!-- Nút Gửi -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Gửi đánh giá</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
+      
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@if(session('openModal'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var myModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            myModal.show();
+        });
+    </script>
+@endif
+
+
+
+
+
+<!-- -->
 
                     </div>
 
@@ -352,6 +471,28 @@
 </div>
 
         </div>
+        <div class="container">
+        <h2>Thông tin quán: {{ $coffeeShop->shop_name }}</h2>
+        
+        <h3>Đánh giá của khách hàng</h3>
+        @if($coffeeShop->reviews->count() > 0)
+            @foreach($coffeeShop->reviews as $review)
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <p><strong>Người dùng:</strong> {{ $review->user_id }}</p>
+                        <p><strong>Đánh giá:</strong> {{ $review->content }}</p>
+                        <p><strong>Điểm:</strong> {{ $review->rating }}/5</p>
+                        @if($review->img_url)
+                            <img src="{{ asset($review->img_url) }}" alt="Ảnh đánh giá" width="200">
+                        @endif
+                        <p><strong>Lượt thích:</strong> {{ $review->likes_count }}</p>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <p>Chưa có đánh giá nào.</p>
+        @endif
+    </div>
         <div class="col-lg-4">
             <div class="bg-white p-4 rounded shadow-sm mb-4">
                 <h2 class="fs-5 fw-bold mb-3">Quản lý đánh giá</h2>

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignId('shop_id')->constrained('coffeeshop');
             $table->text('content');
             $table->integer('rating');
-            $table->string('img_url');
+            $table->string('img_url')->nullable();
+
             $table->integer('likes_count')->default(0);
             $table->timestamps();
         });

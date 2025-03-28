@@ -1,4 +1,5 @@
-@extends('admin.layout')
+@extends('backend.admin.layout')
+
 
 @section('content')
 <div class="container mx-auto p-4">

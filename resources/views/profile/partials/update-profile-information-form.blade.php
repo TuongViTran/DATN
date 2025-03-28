@@ -106,9 +106,9 @@ label {
 
 <section class="profile-container">
     <header>
-        <h2 class="section-title">{{ __('Profile Information') }}</h2>
+        <h2 class="section-title">{{ __('Thông tin cá nhân') }}</h2>
         <p class="section-description">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Cập nhật thông tin cá nhân và địa chỉ email của tài khoản của bạn.") }}
         </p>
     </header>
 
@@ -121,7 +121,7 @@ label {
         @method('patch')
 
         <div class="form-group">
-            <label for="name">{{ __('Name') }}</label>
+            <label for="name">{{ __('Họ và Tên') }}</label>
             <input id="name" name="name" type="text" class="input-field" 
                 value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
             <p class="error-message">{{ $errors->first('name') }}</p>
@@ -135,14 +135,14 @@ label {
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div class="verification-message">
-                    <p>{{ __('Your email address is unverified.') }}</p>
+                    <p>{{ __('Địa chỉ email của bạn chưa được xác minh.') }}</p>
                     <button form="send-verification" class="verification-button">
-                        {{ __('Click here to re-send the verification email.') }}
+                        {{ __('Nhấn vào đây để gửi lại email xác minh.') }}
                     </button>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="success-message">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('Một liên kết xác minh mới đã được gửi đến địa chỉ email của bạn.') }}
                         </p>
                     @endif
                 </div>
@@ -150,12 +150,12 @@ label {
         </div>
 
         <div class="form-actions">
-            <button type="submit" class="save-button">{{ __('Save') }}</button>
+            <button type="submit" class="save-button">{{ __('Lưu') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p class="saved-message" x-data="{ show: true }"
                     x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)">
-                    {{ __('Saved.') }}
+                    {{ __('Đã lưu.') }}
                 </p>
             @endif
         </div>

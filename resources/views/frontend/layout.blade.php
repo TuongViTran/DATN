@@ -69,9 +69,19 @@
     @auth
         <!-- Nếu đã đăng nhập -->
         <div class="user-menu" id="user-menu">
+
             <span class="user-role">{{ Auth::user()->account_type === 'owner' ? 'Chủ Quán' : 'Khách Hàng' }}</span>
             <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('frontend/images/default_avatar.jpg') }}" 
                  alt="Avatar" class="user-avatar" id="avatar">
+        @php
+            $defaultAvatar = Auth::user()->avatar 
+                ? asset(Auth::user()->avatar) 
+                : (Auth::user()->gender === 'male' 
+                    ? asset('frontend/images/default_avatar.jpg') 
+                    : asset('frontend/images/default_avatar1.jpg'));
+        @endphp
+        
+        <img src="{{ $defaultAvatar }}" alt="Avatar" class="user-avatar" id="avatar">
             <span class="user-name">{{ Auth::user()->full_name }}</span>
             <ul class="dropdown-menu" id="dropdown-menu">
                 <li><a href="{{ route('profile') }}">Trang cá nhân</a></li>

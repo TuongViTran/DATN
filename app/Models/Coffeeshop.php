@@ -25,6 +25,11 @@ class Coffeeshop extends Model
         return $this->belongsTo(Address::class, 'address_id', 'id');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'shop_id');
+    }
+
     // Quan hệ tới user (chủ quán)
     public function owner() {
         return $this->belongsTo(User::class, 'user_id');
@@ -50,5 +55,7 @@ class Coffeeshop extends Model
     {
         return $this->hasMany(SocialNetwork::class, 'coffeeshop_id');
     }
+  
+
 }
 ?>

@@ -15,12 +15,12 @@ class User extends Authenticatable
         'full_name',
         'email',
         'password',
-        'phone',
-        'avatar_url',
         'account_type',
         'role',
+        'phone',
+        'avatar_url', // Thêm trường avatar_url vào đây
+        'gender',
     ];
-
     protected $hidden = [
         'password',
         'remember_token',

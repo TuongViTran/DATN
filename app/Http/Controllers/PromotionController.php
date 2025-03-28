@@ -11,6 +11,7 @@ class PromotionController extends Controller
     public function index()
     {
         $promotions = Promotion::all();
-        return view('promotions.index', compact('promotions'));
+        return view('backend.admin.promotion.index', compact('promotions'));
+
     }
 }

@@ -33,29 +33,63 @@ class RegisteredUserController extends Controller
         $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'phone' => 'required|string|max:15',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', Rule::in(['user', 'owner', 'admin'])],
+            'role' => ['required', Rule::in(['user', 'owner',])],
+            'gender' => ['required', Rule::in(['male', 'female'])], // Thêm validation cho giới tính
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+    
+        // Chọn avatar mặc định dựa trên giới tính
+        $defaultAvatar  = $request->gender === 'male' 
+            ? 'frontend/images/default_avatar.jpg' 
+            : 'frontend/images/default_avatar1.jpg';
 
         $user = User::create([
             'full_name' => $request->full_name,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'account_type' => 'user', // Thêm giá trị mặc định
+            'account_type' => 'user',
             'role' => $request->role,
+            'gender' => $request->gender,
+            'avatar' => $defaultAvatar, // Gán avatar mặc định
         ]);
 
         event(new Registered($user));
         
         // Điều hướng các trang 
         Auth::login($user);
-        if ($user->role === 'admin') {
+        if ($user->role === 'admin') 
             return redirect()->route('dashboard')->with('success', 'Đăng ký thành công! Chào mừng Admin.');
-        } elseif ($user->role === 'owner') {
+        } else if ($user->role === 'owner') {
             return redirect()->route('cafes_management')->with('success', 'Đăng ký thành công! Chào mừng chủ quán.');
         } else {
             return redirect()->route('trangchu')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
+
+        // Xử lý ảnh nếu có
+        if ($request->hasFile('avatar_url')) {
+            $avatarPath = $request->file('avatar_url')->store('avatars', 'public'); // Lưu ảnh vào thư mục public/avatars
+            $userData['avatar_url'] = $avatarPath; // Lưu đường dẫn ảnh vào mảng dữ liệu người dùng
+
         }
+    
+        // Tạo người dùng với dữ liệu đã bao gồm avatar_url
+        $user = User::create($userData);
+    
+        event(new Registered($user));
+    
+        Auth::login($user);
+        if ($user->role === 'owner') {
+            return redirect()->route('cafes_management')->with('success', 'Đăng ký thành công! Chào mừng chủ quán.');
+        }
+
+        return redirect()->route('home')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
+
     }
+
+    protected function authenticated(Request $request, $user)
+{
+    return redirect(session()->pull('url.intended', route('home')));
+}
 }

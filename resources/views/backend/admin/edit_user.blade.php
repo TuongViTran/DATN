@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('backend.admin.layout')
 
 @section('title', 'Chỉnh sửa người dùng')
 
@@ -9,6 +9,13 @@
         @csrf
         @method('PUT')
         
+        <div class="mb-4">
+            <label for="avatar" class="block text-sm font-bold mb-2">Ảnh đại diện</label>
+            <input type="file" name="avatar" id="avatar" class="border border-gray-300 rounded p-2 w-full" accept="image/*">
+            @if ($user->avatar_url)
+            <img src="{{ $user->avatar_url }}" alt="User  Avatar" class="mt-2 rounded-full w-10 h-10">
+            @endif
+        </div>
         <div class="mb-4">
             <label for="full_name" class="block text-sm font-bold mb-2">Họ và tên</label>
             <input type="text" name="full_name" id="full_name" value="{{ $user->full_name }}" class="border border-gray-300 rounded p-2 w-full" required>
@@ -24,13 +31,7 @@
             <input type="text" name="phone" id="phone" value="{{ $user->phone }}" class="border border-gray-300 rounded p-2 w-full">
         </div>
         
-        <div class="mb-4">
-            <label for="avatar" class="block text-sm font-bold mb-2">Ảnh đại diện</label>
-            <input type="file" name="avatar" id="avatar" class="border border-gray-300 rounded p-2 w-full" accept="image/*">
-            @if ($user->avatar_url)
-            <img src="{{ $user->avatar_url }}" alt="User  Avatar" class="mt-2 rounded-full w-10 h-10">
-            @endif
-        </div>
+       
         
         <div class="mb-4">
             <label for="account_type" class="block text-sm font-bold mb-2">Vai trò</label>

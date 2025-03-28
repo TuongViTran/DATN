@@ -82,6 +82,11 @@
                             <i class="fas fa-cog mr-3"></i> Cài đặt
                         </a>
                     </li>
+                    <li class="mt-6">
+                        <a href="{{ route('register') }}" class="flex items-center text-red-600 p-3 rounded-lg hover:bg-red-100 transition">
+                            <i class="fas fa-sign-out-alt mr-3"></i> Đăng xuất
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -110,10 +115,13 @@
                             <i class="fas fa-question-circle text-gray-600 text-lg"></i>
                         </div>
             
-                        <!-- Avatar -->
-                        <div class="w-10 h-10 rounded-full border-2 border-yellow-400 shadow-md cursor-pointer overflow-hidden">
-                            <img src="https://i.pravatar.cc/50" alt="Avatar" class="w-full h-full object-cover">
-                        </div>
+                        <div class="flex items-center space-x-2">
+    <!-- Avatar -->
+    <div class="w-10 h-10 rounded-full border-2 border-yellow-400 shadow-md cursor-pointer overflow-hidden">
+        <img src="{{ asset('backend/img/Icon (admin)/admin.jpg') }}" alt="Avatar" class="w-full h-full object-cover">
+    </div>
+    <span class="text-lg font-bold text-black-600 mt-1 ">Tường vi</span> 
+</div>
                     </div>
                 </div>
             </div>

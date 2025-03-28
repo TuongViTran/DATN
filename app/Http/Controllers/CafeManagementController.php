@@ -20,6 +20,6 @@ class CafeManagementController extends Controller
         $popularLocations = ['Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng'];
     
         // Truyền các biến vào view
-        return view('cafes.index', compact('coffeeShops', 'query', 'popularKeywords', 'popularLocations'));
+        return view('backend.admin.cafe.index', compact('coffeeShops', 'query', 'popularKeywords', 'popularLocations'));
     }
 }
