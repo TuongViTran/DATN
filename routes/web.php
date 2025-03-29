@@ -16,7 +16,7 @@ Route::get('/test-session', function () {
     return 'Session đã được ghi!';
 });
 Route::get('/', [HomeController::class, 'trangchu'])->name('trangchu');
-Route::get('/feed', [HomeController::class, 'feed'])->name('feed');
+// Route::get('/feed', [HomeController::class, 'feed'])->name('feed');
 Route::get('/tintuc', [HomeController::class, 'tintuc'])->name('tintuc');
 Route::get('/thongbao', [HomeController::class, 'thongbao'])->name('thongbao');
 Route::get('/user', [HomeController::class, 'user'])->name('user');
@@ -70,3 +70,12 @@ Route::middleware(['auth', 'role:owner'])->group(function () {
     Route::get('/owner/{id}/info', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
     Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
 });
+
+
+use App\Http\Controllers\ReviewController;
+
+Route::post('/review/{id}/like', [ReviewController::class, 'likeReview']);
+
+use App\Http\Controllers\FeedController;
+
+Route::get('/feed', [FeedController::class, 'feed'])->name('feed');
