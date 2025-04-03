@@ -97,10 +97,6 @@
                         <i class="fas fa-lock absolute top-3 right-4 text-gray-400"></i>
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label for="avatar_url" class="block text-gray-700 font-semibold mb-2">Ảnh đại diện</label>
-                    <input id="avatar_url" type="file" name="avatar_url" accept="image/*" class="block w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500"/>
-                </div>
                 <div class="mt-4">
                     <label for="role" class="block text-gray-700 font-semibold mb-2">Loại tài khoản</label>
                     <select id="role" name="role" class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500">
