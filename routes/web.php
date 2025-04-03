@@ -15,13 +15,8 @@ Route::get('/test-session', function () {
     Session::put('test_key', 'Hello Session');
     return 'Session đã được ghi!';
 });
-Route::get('/', [HomeController::class, 'trangchu'])->name('trangchu');
-// Route::get('/feed', [HomeController::class, 'feed'])->name('feed');
-Route::get('/tintuc', [HomeController::class, 'tintuc'])->name('tintuc');
-Route::get('/thongbao', [HomeController::class, 'thongbao'])->name('thongbao');
-Route::get('/user', [HomeController::class, 'user'])->name('user');
 
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Backend --------------------------------------------
 
@@ -29,10 +24,10 @@ Route::post('/like-shop/{id}', [CoffeeShopController::class, 'like'])->name('sho
 
 Route::get('/dashboard', function () {
     return view('backend.admin.dashboard'); // Chỉ định đường dẫn đầy đủ đến view
-})->name('dashboard')->middleware(['auth', 'role:admin']); // Chỉ admin mới vào được
+})->name('dashboard')->middleware(['auth']); // Chỉ cần 'auth' để yêu cầu người dùng đăng nhập
 
 // User Management Routes
-Route::prefix('user-management')->name('user.')->middleware(['auth', 'role:admin'])->group(function () {
+Route::prefix('user-management')->name('user.')->middleware(['auth'])->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('management'); // Hiển thị danh sách người dùng
     Route::get('/create', [UserController::class, 'create'])->name('create'); // Hiển thị form thêm mới người dùng
     Route::post('/', [UserController::class, 'store'])->name('store'); // Lưu người dùng mới
@@ -41,6 +36,7 @@ Route::prefix('user-management')->name('user.')->middleware(['auth', 'role:admin
     Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy'); // Xóa người dùng
     Route::get('/{user}', [UserController::class, 'show'])->name('show'); // Hiển thị thông tin người dùng
 });
+
 
 // Định nghĩa route cho trang quản lý quán cà phê
 Route::get('/coffeeshops', [CoffeeShopController::class, 'index'])->name('coffeeshops_management');
