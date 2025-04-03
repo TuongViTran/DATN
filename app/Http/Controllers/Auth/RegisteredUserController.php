@@ -57,27 +57,6 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-        
-        // Điều hướng các trang 
-        Auth::login($user);
-        if ($user->role === 'admin') 
-            return redirect()->route('dashboard')->with('success', 'Đăng ký thành công! Chào mừng Admin.');
-        } else if ($user->role === 'owner') {
-            return redirect()->route('cafes_management')->with('success', 'Đăng ký thành công! Chào mừng chủ quán.');
-        } else {
-            return redirect()->route('trangchu')->with('success', 'Đăng ký thành công! Chào mừng bạn.');
-
-        // Xử lý ảnh nếu có
-        if ($request->hasFile('avatar_url')) {
-            $avatarPath = $request->file('avatar_url')->store('avatars', 'public'); // Lưu ảnh vào thư mục public/avatars
-            $userData['avatar_url'] = $avatarPath; // Lưu đường dẫn ảnh vào mảng dữ liệu người dùng
-
-        }
-    
-        // Tạo người dùng với dữ liệu đã bao gồm avatar_url
-        $user = User::create($userData);
-    
-        event(new Registered($user));
     
         Auth::login($user);
         if ($user->role === 'owner') {
