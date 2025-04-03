@@ -22,9 +22,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::post('/like-shop/{id}', [CoffeeShopController::class, 'like'])->name('shop.like');
 
-Route::get('/dashboard', function () {
-    return view('backend.admin.dashboard'); // Chỉ định đường dẫn đầy đủ đến view
-})->name('dashboard')->middleware(['auth']); // Chỉ cần 'auth' để yêu cầu người dùng đăng nhập
+Route::middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':admin'])->group(function () {
+    Route::view('/dashboard', 'backend.admin.dashboard')->name('dashboard');
+});
+
 
 // User Management Routes
 Route::prefix('user-management')->name('user.')->middleware(['auth'])->group(function () {
@@ -66,7 +67,6 @@ Route::middleware(['auth', 'role:owner'])->group(function () {
     Route::get('/owner/{id}/info', [OwnerController::class, 'infor'])->name('coffeeshop.owner'); // lấy thông tin quán cafe
     Route::put('/owner/update/{id}', [OwnerController::class, 'updateinfor'])->name('owner.updateinfor'); // cập nhật thông tin quán cafe
 });
-
 
 use App\Http\Controllers\ReviewController;
 
