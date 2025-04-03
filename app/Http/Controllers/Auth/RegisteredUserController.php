@@ -55,7 +55,9 @@ class RegisteredUserController extends Controller
             'gender' => $request->gender,
             'avatar' => $defaultAvatar, // Gán avatar mặc định
         ]);
-
+        // Xử lý ảnh nếu có
+     
+    
         event(new Registered($user));
     
         Auth::login($user);
@@ -71,4 +73,5 @@ class RegisteredUserController extends Controller
 {
     return redirect(session()->pull('url.intended', route('home')));
 }
+
 }
