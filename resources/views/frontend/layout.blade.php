@@ -71,8 +71,6 @@
         <div class="user-menu" id="user-menu">
 
             <span class="user-role">{{ Auth::user()->account_type === 'owner' ? 'Chủ Quán' : 'Khách Hàng' }}</span>
-            <img src="{{ Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('frontend/images/default_avatar.jpg') }}" 
-                 alt="Avatar" class="user-avatar" id="avatar">
         @php
             $defaultAvatar = Auth::user()->avatar 
                 ? asset(Auth::user()->avatar) 
