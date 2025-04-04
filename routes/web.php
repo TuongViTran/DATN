@@ -16,8 +16,8 @@ Route::get('/test-session', function () {
     return 'Session đã được ghi!';
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::get('/', [HomeController::class, 'index'])->name(name: 'home');
+Route::get('/trangchu', [HomeController::class, 'index'])->name('trangchu');
 // Backend --------------------------------------------
 
 Route::post('/like-shop/{id}', [CoffeeShopController::class, 'like'])->name('shop.like');
@@ -75,3 +75,8 @@ Route::post('/review/{id}/like', [ReviewController::class, 'likeReview']);
 use App\Http\Controllers\FeedController;
 
 Route::get('/feed', [FeedController::class, 'feed'])->name('feed');
+
+//dat tam thoi
+Route::get('/tintuc', [HomeController::class, 'tintuc'])->name('tintuc');
+
+Route::get('/thongbao', [HomeController::class, 'index'])->name('thongbao');
